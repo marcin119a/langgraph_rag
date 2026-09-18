@@ -1,17 +1,16 @@
+from functools import lru_cache
+
 from langsmith.wrappers import wrap_openai
 from openai import OpenAI
-from settings import settings
-from schemas import Intent, FaqAnswer
-from functools import lru_cache
-from faq import get_answer_text
 
+from faq import get_answer_text
+from schemas import FaqAnswer, Intent
+from settings import settings
 
 
 @lru_cache(maxsize=1)
 def get_client() -> OpenAI:
     return wrap_openai(OpenAI(api_key=settings.openai_api_key))
-
-
 
 
 CLASSIFY_PROMPT = """Klasyfikujesz zapytania klientów banku do jednej z kategorii FAQ:
@@ -54,10 +53,12 @@ def answer_faq(category: str, question: str) -> FaqAnswer:
         model=settings.model_name,
         messages=[
             {"role": "system", "content": ANSWER_PROMPT},
-            {"role": "user", "content": f"Pytanie: {question}\n\nTekst FAQ:\n{faq_text}"},
+            {
+                "role": "user",
+                "content": f"Pytanie: {question}\n\nTekst FAQ:\n{faq_text}",
+            },
         ],
         response_format=FaqAnswer,
         temperature=0,
     )
     return completion.choices[0].message.parsed
-

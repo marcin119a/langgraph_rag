@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 from typing import Literal
+
+from pydantic import BaseModel, Field
 
 Category = Literal[
     "pin",
@@ -17,8 +18,12 @@ Category = Literal[
 class Intent(BaseModel):
     """Wyjście węzła `classify_intent`."""
 
-    category: Category = Field(description="Kategoria FAQ najlepiej opisująca pytanie, albo 'consultant'")
-    question: str = Field(description="Właściwe pytanie klienta, oczyszczone z podziękowań/wstępów")
+    category: Category = Field(
+        description="Kategoria FAQ najlepiej opisująca pytanie, albo 'consultant'"
+    )
+    question: str = Field(
+        description="Właściwe pytanie klienta, oczyszczone z podziękowań/wstępów"
+    )
     confidence: float = Field(ge=0.0, le=1.0)
 
 
@@ -35,5 +40,9 @@ class GraphState(BaseModel):
 class FaqAnswer(BaseModel):
     """Wyjście węzła `faq_answer` — model tylko przeformułowuje ustalony tekst FAQ."""
 
-    answer: str = Field(description="Odpowiedź po polsku, oparta wyłącznie na tekście FAQ dla danej kategorii")
-    found: bool = Field(description="False, jeśli tekst FAQ dla tej kategorii nie odpowiada na pytanie")
+    answer: str = Field(
+        description="Odpowiedź po polsku, oparta wyłącznie na tekście FAQ dla danej kategorii"
+    )
+    found: bool = Field(
+        description="False, jeśli tekst FAQ dla tej kategorii nie odpowiada na pytanie"
+    )

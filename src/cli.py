@@ -1,4 +1,3 @@
-
 import argparse
 import json
 import logging
@@ -6,10 +5,10 @@ import os
 
 from settings import settings
 
-logging.basicConfig(level=logging.INFO) 
+logging.basicConfig(level=logging.INFO)
 
 
-from graph import build_graph  
+from graph import build_graph
 
 if settings.langsmith_tracing:
     os.environ["LANGSMITH_TRACING"] = "true"
@@ -18,9 +17,17 @@ if settings.langsmith_tracing:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Przepuszcza nagranie audio przez graf voice-bank-bot.")
-    parser.add_argument("audio_path", help="Ścieżka do pliku audio (wav, mp3, m4a, ...)")
-    parser.add_argument("--json", action="store_true", help="Wypisz wynik jako JSON zamiast czytelnego tekstu")
+    parser = argparse.ArgumentParser(
+        description="Przepuszcza nagranie audio przez graf voice-bank-bot."
+    )
+    parser.add_argument(
+        "audio_path", help="Ścieżka do pliku audio (wav, mp3, m4a, ...)"
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Wypisz wynik jako JSON zamiast czytelnego tekstu",
+    )
     args = parser.parse_args()
 
     compiled_graph = build_graph()

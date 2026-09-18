@@ -10,4 +10,3 @@ def transcribe_file(path: str) -> str:
             language=settings.stt_language,
         )
     return transcript.text
-

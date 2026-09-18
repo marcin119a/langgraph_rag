@@ -18,14 +18,16 @@ from pydantic import BaseModel
 
 from settings import settings
 
-logging.basicConfig(level=logging.INFO)  # żeby log_transcript_node (graph.py) było widać w konsoli
+logging.basicConfig(
+    level=logging.INFO
+)  # żeby log_transcript_node (graph.py) było widać w konsoli
 
 if settings.langsmith_tracing:
     os.environ["LANGSMITH_TRACING"] = "true"
     os.environ["LANGSMITH_API_KEY"] = settings.langsmith_api_key
     os.environ["LANGSMITH_PROJECT"] = settings.langsmith_project
 
-from graph import build_graph  # noqa: E402 — po ustawieniu zmiennych LangSmith powyżej
+from graph import build_graph
 
 app = FastAPI(title="Voice bot bankowy", version="0.1.0")
 compiled_graph = build_graph()

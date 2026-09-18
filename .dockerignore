@@ -1,0 +1,5 @@
+.venv
+.env
+data/uploads
+data/samples
+__pycache__

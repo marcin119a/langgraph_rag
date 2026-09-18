@@ -1,10 +1,11 @@
-
-import stt
-from schemas import GraphState
-import llm
 import logging
 from uuid import uuid4
+
 from langgraph.graph import END, StateGraph
+
+import llm
+import stt
+from schemas import GraphState
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,11 @@ def transcribe_node(state: GraphState) -> dict:
 
 def log_transcript_node(state: GraphState) -> dict:
     """Zrzuca surową transkrypcję do logów — bez korekty, bez wywołania LLM."""
-    logger.info("transkrypcja audio_path=%s raw_transcript=%r", state.audio_path, state.raw_transcript)
+    logger.info(
+        "transkrypcja audio_path=%s raw_transcript=%r",
+        state.audio_path,
+        state.raw_transcript,
+    )
     return {}
 
 

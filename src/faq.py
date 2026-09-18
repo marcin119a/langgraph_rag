@@ -13,7 +13,9 @@ def load_faq() -> dict[str, str]:
     """
     text = settings.faq_path.read_text(encoding="utf-8")
     faq: dict[str, str] = {}
-    for header, body in re.findall(r"^## ([^\n]+)\n(.*?)(?=^## |\Z)", text, flags=re.M | re.S):
+    for header, body in re.findall(
+        r"^## ([^\n]+)\n(.*?)(?=^## |\Z)", text, flags=re.MULTILINE | re.DOTALL
+    ):
         slug = header.split("—", 1)[0].strip()
         faq[slug] = f"{header.strip()}\n{body.strip()}"
     return faq
