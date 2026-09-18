@@ -11,6 +11,11 @@ logging.basicConfig(level=logging.INFO)
 
 from graph import build_graph  
 
+if settings.langsmith_tracing:
+    os.environ["LANGSMITH_TRACING"] = "true"
+    os.environ["LANGSMITH_API_KEY"] = settings.langsmith_api_key
+    os.environ["LANGSMITH_PROJECT"] = settings.langsmith_project
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Przepuszcza nagranie audio przez graf voice-bank-bot.")
