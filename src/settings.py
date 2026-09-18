@@ -16,4 +16,6 @@ class Settings(BaseSettings):
     langsmith_api_key: str = ""  # LANGSMITH_API_KEY
     langsmith_project: str = "voice-bank-bot"  # LANGSMITH_PROJECT
 
+    uploads_dir: Path = Path("data/uploads")
+
 settings = Settings()

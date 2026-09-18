@@ -29,3 +29,5 @@ htmlcov/
 logs/
 
 .env
+
+data/uploads/
