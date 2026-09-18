@@ -25,7 +25,7 @@ htmlcov/
 # Local data and secrets
 *.sqlite3
 *.db
-data/
+#data/
 logs/
 
 .env
